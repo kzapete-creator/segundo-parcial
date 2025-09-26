@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+{% block title %}Créditos — Cursos{% endblock %}
+{% block content %}
+<h1 class="mb-4">Créditos</h1>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item bg-transparent text-light"><strong>Autor:</strong> {{ autor }}</li>
+  <li class="list-group-item bg-transparent text-light"><strong>Universidad:</strong> {{ universidad }}</li>
+  <li class="list-group-item bg-transparent text-light"><strong>Asignatura:</strong> {{ curso }}</li>
+  <li class="list-group-item bg-transparent text-light"><strong>Catedrático:</strong> {{ catedratico }}</li>
+  <li class="list-group-item bg-transparent text-light"><strong>Semestre:</strong> {{ semestre }}</li>
+  <li class="list-group-item bg-transparent text-light"><strong>Sección:</strong> {{ seccion }}</li>
+</ul>
+{% endblock %}

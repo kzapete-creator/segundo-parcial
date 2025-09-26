@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Usuarios — Cursos{% endblock %}
+{% block content %}
+<h1 class="mb-4">Usuarios</h1>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="card">
+      <div class="card-body">
+        {% if usuarios %}
+          <div class="table-responsive">
+            <table class="table table-borderless align-middle text-light">
+              <thead>
+                <tr>
+                  <th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Interés</th><th>Creado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for u in usuarios %}
+                  <tr>
+                    <td>{{ u.nombre_completo }}</td>
+                    <td>{{ u.correo }}</td>
+                    <td>{{ u.telefono|default:'—' }}</td>
+                    <td><span class="badge">{{ u.interes|default:'—' }}</span></td>
+                    <td class="text-secondary small">{{ u.creado|date:'d/m/Y H:i' }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div class="alert">No hay usuarios registrados aún.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Registrar usuario</h5>
+        {% if form.errors %}
+          <div class="alert alert-danger">Revisa el formulario: {{ form.errors }}</div>
+        {% endif %}
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <div class="d-flex gap-2">
+            <button class="btn btn-gradient">Guardar</button>
+            <button class="btn btn-ghost" type="reset">Limpiar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

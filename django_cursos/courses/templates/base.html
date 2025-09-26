@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{{ page_title|default:"Cursos en línea" }}{% endblock %}</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fuente fresca -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Paleta vibrante */
+      --bg-1: #0e121b;
+      --bg-2: #12172a;
+      --grad-1: #7c3aed;   /* morado */
+      --grad-2: #06b6d4;   /* cian  */
+      --grad-3: #22c55e;   /* verde */
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 10px 30px rgba(2, 8, 23, .35);
+    }
+
+    * { box-sizing: border-box }
+    html,body { height: 100% }
+    body{
+      margin:0;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(6,182,212,.25), transparent 60%),
+        radial-gradient(700px 400px at 50% 120%, rgba(34,197,94,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Navbar glassy */
+    .navbar {
+      backdrop-filter: saturate(160%) blur(10px);
+      background: rgba(8,14,28,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-brand{
+      font-weight: 700;
+      letter-spacing: .2px;
+      background: linear-gradient(90deg,var(--grad-1),var(--grad-2),var(--grad-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
+    }
+    .nav-link{ color:#dbeafe !important; opacity:.9 }
+    .nav-link:hover{ color:white !important; opacity:1 }
+
+    /* Contenedor principal */
+    .shell{ padding-top: 32px; padding-bottom: 32px; }
+
+    /* Cards glass */
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      color: var(--text);
+    }
+    .card-title{ font-weight:700 }
+
+    /* Botones */
+    .btn-gradient{
+      border:0;
+      color:#051016;
+      font-weight:700;
+      border-radius: 12px;
+      background: linear-gradient(90deg,var(--grad-2),var(--grad-3));
+      transition: transform .08s ease-in-out, box-shadow .2s;
+      box-shadow: 0 8px 20px rgba(6,182,212,.35);
+    }
+    .btn-gradient:hover{ transform: translateY(-1px); box-shadow: 0 10px 26px rgba(6,182,212,.5); }
+    .btn-ghost{
+      border:1px solid var(--border);
+      color:#e2e8f0;
+      background: rgba(255,255,255,0.02);
+      border-radius:12px;
+    }
+
+    /* Inputs */
+    .form-control, .form-select, textarea{
+      background: rgba(8,14,28,.65) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 12px !important;
+    }
+
+    /* Badges arcoíris */
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: linear-gradient(90deg, rgba(124,58,237,.35), rgba(6,182,212,.35));
+      color: #f0f9ff;
+    }
+
+    /* Alertas suaves */
+    .alert{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      border-radius:14px;
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--border);
+      color: #cbd5e1;
+      opacity:.85;
+    }
+
+    /* Títulos con gradiente */
+    h1,h2{
+      background: linear-gradient(90deg, #fff, #e0f2fe 30%, #bbf7d0 60%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing:.3px;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Cursos</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-0 ms-lg-3 gap-1">
+          <li class="nav-item"><a class="nav-link" href="/videos/">Videos</a></li>
+          <li class="nav-item"><a class="nav-link" href="/usuarios/">Usuarios</a></li>
+          <li class="nav-item"><a class="nav-link" href="/creditos/">Créditos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="container shell">
+    {% if messages %}
+      <div class="mb-3">
+        {% for m in messages %}
+        <div class="alert alert-{{ m.tags|default:'info' }} mb-3">{{ m }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-4">
+    <div class="container small">© {% now "Y" %} Cursos en línea — Demo académica</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
