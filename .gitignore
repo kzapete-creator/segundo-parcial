@@ -1,0 +1,14 @@
+# .gitignore
+@"
+.venv/
+__pycache__/
+*.py[cod]
+db.sqlite3
+.vscode/
+**/migrations/__pycache__/
+"@ | Out-File -Encoding utf8 .gitignore
+
+# requirements.txt (mínimo)
+@"
+Django==5.2.6
+"@ | Out-File -Encoding utf8 requirements.txt
